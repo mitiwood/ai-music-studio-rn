@@ -1,0 +1,55 @@
+name: Build Android & iOS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    name: Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Android Release APK
+        working-directory: android
+        run: ./gradlew assembleRelease
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+
+  notify:
+    name: Build Notification
+    needs: [build-android]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Send notification
+        env:
+          RUN_ID: ${{ github.run_id }}
+          ANDROID_OK: ${{ needs.build-android.result }}
+        run: |
+          python3 -c "
+          import urllib.request, json, os
+          run_id = os.environ.get('RUN_ID','')
+          android = 'OK' if os.environ.get('ANDROID_OK')=='success' else 'FAIL'
+          base = f'https://nightly.link/mitiwood/ai-music-studio-rn/actions/runs/{run_id}'
+          msg = f'RN build!\nAndroid: {android}\nAPK: {base}/android-apk.zip'
+          site = 'https://ddinggok.com'
+          try:
+            tg = json.dumps({'event':'build','data':{'message':msg}}).encode('utf-8')
+            urllib.request.urlopen(urllib.request.Request(f'{site}/api/telegram',data=tg,headers={'Content-Type':'application/json; charset=utf-8','Authorization':'Bearer kenny2024!'}),timeout=10)
+          except: pass
+          "

@@ -1,0 +1,36 @@
+export const Colors = {
+  primary: '#7C3AED',
+  primaryLight: '#A855F7',
+  primaryDark: '#5B21B6',
+  accent: '#EC4899',
+  accentLight: '#F472B6',
+  bgDark: '#0A0A1A',
+  cardDark: '#14142B',
+  surfaceDark: '#1C1C3A',
+  borderDark: '#2A2A4A',
+  bgLight: '#F8F8FC',
+  cardLight: '#FFFFFF',
+  surfaceLight: '#F0F0F8',
+  borderLight: '#E0E0F0',
+  text1: '#FFFFFF',
+  text2: '#6B6580',
+  text3: '#4A4560',
+  success: '#10B981',
+  warning: '#F59E0B',
+  error: '#EF4444',
+  info: '#3B82F6',
+  transparent: 'transparent',
+  overlay: 'rgba(0,0,0,0.5)',
+};
+
+export type ThemeMode = 'dark' | 'light';
+
+export const getThemeColors = (mode: ThemeMode) => ({
+  bg: mode === 'dark' ? Colors.bgDark : Colors.bgLight,
+  card: mode === 'dark' ? Colors.cardDark : Colors.cardLight,
+  surface: mode === 'dark' ? Colors.surfaceDark : Colors.surfaceLight,
+  border: mode === 'dark' ? Colors.borderDark : Colors.borderLight,
+  text: mode === 'dark' ? Colors.text1 : '#1A1A2E',
+  textSub: Colors.text2,
+  textMuted: Colors.text3,
+});
