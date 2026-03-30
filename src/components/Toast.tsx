@@ -2,8 +2,10 @@ import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
   Animated,
   Text,
+  View,
   StyleSheet,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../theme/colors';
 import {Typography} from '../theme/typography';
 import {Spacing, Radius} from '../theme/spacing';
@@ -23,11 +25,11 @@ const toastColors: Record<ToastType, string> = {
   warning: Colors.warning,
 };
 
-const toastIcons: Record<ToastType, string> = {
-  success: '\u2705',
-  error: '\u274c',
-  info: '\u2139\ufe0f',
-  warning: '\u26a0\ufe0f',
+const toastIconNames: Record<ToastType, string> = {
+  success: 'checkmark-circle',
+  error: 'close-circle',
+  info: 'information-circle',
+  warning: 'warning',
 };
 
 let _showToast: (message: string, type?: ToastType) => void = () => {};
@@ -86,7 +88,7 @@ const ToastItem: React.FC<{toast: ToastMessage; onDone: (id: number) => void}> =
           opacity: opacityAnim,
         },
       ]}>
-      <Text style={styles.toastIcon}>{toastIcons[toast.type]}</Text>
+      <Icon name={toastIconNames[toast.type]} size={18} color={toastColors[toast.type]} style={styles.toastIcon} />
       <Text style={styles.toastText}>{toast.text}</Text>
     </Animated.View>
   );

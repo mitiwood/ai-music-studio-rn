@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
   Dimensions,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, getThemeColors, Typography, Spacing, Radius} from '../../theme';
 import {useAuthStore, useSettingsStore} from '../../stores';
 import {tracksApi, Track} from '../../api';
@@ -118,12 +119,19 @@ export default function LibraryScreen() {
           {item.title}
         </Text>
         <Text style={[Typography.caption, {color: tc.textSub}]}>{item.owner_name}</Text>
-        <Text style={[Typography.small, {color: tc.textMuted}]}>
-          ▶ {item.comm_plays || 0}  ♥ {item.comm_likes || 0}
-        </Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Icon name="play" size={10} color={tc.textMuted} />
+          <Text style={[Typography.small, {color: tc.textMuted, marginLeft: 2}]}>
+            {item.comm_plays || 0}
+          </Text>
+          <Icon name="heart" size={10} color={tc.textMuted} style={{marginLeft: Spacing.sm}} />
+          <Text style={[Typography.small, {color: tc.textMuted, marginLeft: 2}]}>
+            {item.comm_likes || 0}
+          </Text>
+        </View>
       </View>
       <TouchableOpacity style={styles.moreBtn} onPress={() => handleDelete(item)}>
-        <Text style={{color: tc.textMuted, fontSize: 20}}>⋯</Text>
+        <Icon name="ellipsis-horizontal" size={20} color={tc.textMuted} />
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -142,7 +150,10 @@ export default function LibraryScreen() {
         numberOfLines={1}>
         {item.title}
       </Text>
-      <Text style={[Typography.small, {color: tc.textMuted}]}>♥ {item.comm_likes || 0}</Text>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Icon name="heart" size={10} color={tc.textMuted} />
+        <Text style={[Typography.small, {color: tc.textMuted, marginLeft: 2}]}>{item.comm_likes || 0}</Text>
+      </View>
     </TouchableOpacity>
   );
 
@@ -191,9 +202,11 @@ export default function LibraryScreen() {
           ))}
         </View>
         <TouchableOpacity onPress={() => setViewMode(v => (v === 'list' ? 'grid' : 'list'))}>
-          <Text style={{fontSize: 20, color: tc.textSub}}>
-            {viewMode === 'list' ? '▦' : '☰'}
-          </Text>
+          <Icon
+            name={viewMode === 'list' ? 'grid' : 'list'}
+            size={20}
+            color={tc.textSub}
+          />
         </TouchableOpacity>
       </View>
 
@@ -201,7 +214,7 @@ export default function LibraryScreen() {
         <ActivityIndicator size="large" color={Colors.primary} style={{marginTop: 60}} />
       ) : data.length === 0 ? (
         <View style={styles.empty}>
-          <Text style={{fontSize: 48, marginBottom: Spacing.lg}}>🎵</Text>
+          <Icon name="musical-notes" size={48} color={tc.textSub} style={{marginBottom: Spacing.lg}} />
           <Text style={[Typography.h3, {color: tc.text, marginBottom: Spacing.sm}]}>
             아직 곡이 없어요
           </Text>

@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   RefreshControl,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, getThemeColors, Typography, Spacing, Radius} from '../../theme';
 import {useAuthStore, useSettingsStore} from '../../stores';
 import {authApi, tracksApi, Track} from '../../api';
@@ -106,9 +107,16 @@ export default function ProfileScreen({route}: any) {
         <Text style={[Typography.bodyBold, {color: tc.text}]} numberOfLines={1}>
           {item.title}
         </Text>
-        <Text style={[Typography.small, {color: tc.textMuted, marginTop: 2}]}>
-          ▶ {item.comm_plays || 0}  ♥ {item.comm_likes || 0}
-        </Text>
+        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 2}}>
+          <Icon name="play" size={10} color={tc.textMuted} />
+          <Text style={[Typography.small, {color: tc.textMuted, marginLeft: 2}]}>
+            {item.comm_plays || 0}
+          </Text>
+          <Icon name="heart" size={10} color={tc.textMuted} style={{marginLeft: Spacing.sm}} />
+          <Text style={[Typography.small, {color: tc.textMuted, marginLeft: 2}]}>
+            {item.comm_likes || 0}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );

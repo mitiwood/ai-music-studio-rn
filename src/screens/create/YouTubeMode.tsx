@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors, Typography, Spacing, Radius } from '../../theme';
-import { useMusicStore } from '../../stores/useMusicStore';
+import { useMusicStore } from '../../stores';
 import { musicApi } from '../../api';
 
 interface AnalysisResult {
@@ -144,7 +145,7 @@ const YouTubeMode: React.FC = () => {
       {/* 안내 플레이스홀더 */}
       {!analysis && !isAnalyzing && (
         <View style={styles.placeholder}>
-          <Text style={styles.placeholderIcon}>📺</Text>
+          <Icon name="logo-youtube" size={48} color={Colors.textSecondary} style={{marginBottom: Spacing.md}} />
           <Text style={styles.placeholderText}>
             YouTube URL을 입력하고 분석 버튼을 눌러주세요
           </Text>

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, getThemeColors, Typography, Spacing, Radius} from '../../theme';
 import {useAuthStore, useSettingsStore} from '../../stores';
 import {PLAN_LIMITS, API_BASE} from '../../utils/constants';
@@ -108,7 +109,7 @@ export default function PlanScreen() {
             </Text>
             {plan.features.map((f, i) => (
               <View key={i} style={styles.featureRow}>
-                <Text style={{color: Colors.success, marginRight: Spacing.sm}}>✓</Text>
+                <Icon name="checkmark-circle" size={16} color={Colors.success} style={{marginRight: Spacing.sm}} />
                 <Text style={[Typography.body, {color: tc.text, flex: 1}]}>{f}</Text>
               </View>
             ))}

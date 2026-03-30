@@ -8,9 +8,9 @@ import {
   FlatList,
   Image,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors, Typography, Spacing, Radius } from '../../theme';
-import { useMusicStore } from '../../stores/useMusicStore';
-import { useAuthStore } from '../../stores/useAuthStore';
+import { useMusicStore, useAuthStore } from '../../stores';
 import { musicApi } from '../../api';
 
 interface Track {
@@ -109,7 +109,7 @@ const MVMode: React.FC = () => {
           </View>
         ) : tracks.length === 0 ? (
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyIcon}>🎵</Text>
+            <Icon name="musical-notes" size={40} color={Colors.textSecondary} style={{marginBottom: Spacing.sm}} />
             <Text style={styles.emptyText}>
               아직 생성한 곡이 없습니다
             </Text>

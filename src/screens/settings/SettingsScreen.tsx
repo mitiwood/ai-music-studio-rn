@@ -10,6 +10,7 @@ import {
   Alert,
   Linking,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, getThemeColors, Typography, Spacing, Radius} from '../../theme';
 import {useAuthStore, useSettingsStore} from '../../stores';
 import {APP_VERSION, PLAN_LIMITS} from '../../utils/constants';
@@ -118,7 +119,7 @@ export default function SettingsScreen({navigation}: any) {
             </Text>
           </View>
         </View>
-        <Text style={{color: tc.textMuted, fontSize: 18}}>›</Text>
+        <Icon name="chevron-forward" size={18} color={tc.textMuted} />
       </TouchableOpacity>
 
       {/* Theme */}
@@ -147,7 +148,7 @@ export default function SettingsScreen({navigation}: any) {
             onPress={() => setLanguage(l)}
             right={
               language === l ? (
-                <Text style={{color: Colors.primary, fontSize: 18}}>✓</Text>
+                <Icon name="checkmark" size={18} color={Colors.primary} />
               ) : undefined
             }
           />

@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../theme/colors';
 import {Typography} from '../theme/typography';
 import {Spacing, Radius} from '../theme/spacing';
@@ -37,7 +38,7 @@ export const TrackListItem: React.FC<TrackListItemProps> = ({
           <Image source={{uri: thumbnail}} style={styles.thumbnailImg} />
         ) : (
           <View style={styles.thumbnailFallback}>
-            <Text style={styles.thumbnailIcon}>{'\ud83c\udfb5'}</Text>
+            <Icon name="musical-notes" size={22} color={Colors.text2} />
           </View>
         )}
       </View>
@@ -52,23 +53,29 @@ export const TrackListItem: React.FC<TrackListItemProps> = ({
           {duration && (
             <Text style={[Typography.small, styles.stat]}>{duration}</Text>
           )}
-          <Text style={[Typography.small, styles.stat]}>
-            {'\u25b6'} {playCount.toLocaleString()}
-          </Text>
-          <Text style={[Typography.small, styles.stat]}>
-            {'\u2764\ufe0f'} {likeCount.toLocaleString()}
-          </Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon name="play" size={10} color={Colors.text3} />
+            <Text style={[Typography.small, styles.stat, {marginLeft: 2}]}>
+              {playCount.toLocaleString()}
+            </Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon name="heart" size={10} color={Colors.text3} />
+            <Text style={[Typography.small, styles.stat, {marginLeft: 2}]}>
+              {likeCount.toLocaleString()}
+            </Text>
+          </View>
         </View>
       </View>
       <View style={styles.actions}>
         {onLike && (
           <TouchableOpacity onPress={onLike} style={styles.actionBtn}>
-            <Text style={styles.actionIcon}>{'\u2764\ufe0f'}</Text>
+            <Icon name="heart" size={16} color={Colors.accent || Colors.primary} />
           </TouchableOpacity>
         )}
         {onMore && (
           <TouchableOpacity onPress={onMore} style={styles.actionBtn}>
-            <Text style={styles.actionIcon}>{'\u22ee'}</Text>
+            <Icon name="ellipsis-vertical" size={16} color={Colors.text2} />
           </TouchableOpacity>
         )}
       </View>

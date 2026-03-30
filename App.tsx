@@ -3,10 +3,10 @@ import {StatusBar, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import AppNavigator from './src/navigation/AppNavigator';
+import {AppNavigator} from './src/navigation/AppNavigator';
 import {useAuthStore} from './src/stores/authStore';
 import {useSettingsStore} from './src/stores/settingsStore';
-import {Toast} from './src/components/Toast';
+import {ToastProvider} from './src/components/Toast';
 
 LogBox.ignoreLogs(['Non-serializable values']);
 
@@ -41,13 +41,14 @@ export default function App() {
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaProvider>
         <NavigationContainer linking={linking}>
-          <StatusBar
-            barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
-            backgroundColor="transparent"
-            translucent
-          />
-          <AppNavigator />
-          <Toast />
+          <ToastProvider>
+            <StatusBar
+              barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
+              backgroundColor="transparent"
+              translucent
+            />
+            <AppNavigator />
+          </ToastProvider>
         </NavigationContainer>
       </SafeAreaProvider>
     </GestureHandlerRootView>

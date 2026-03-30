@@ -21,6 +21,15 @@ export const Colors = {
   info: '#3B82F6',
   transparent: 'transparent',
   overlay: 'rgba(0,0,0,0.5)',
+  // Aliases used by screens
+  textPrimary: '#FFFFFF',
+  textSecondary: '#6B6580',
+  textTertiary: '#4A4560',
+  surface: '#1C1C3A',
+  border: '#2A2A4A',
+  bg: '#0A0A1A',
+  background: '#0A0A1A',
+  card: '#14142B',
 };
 
 export type ThemeMode = 'dark' | 'light';

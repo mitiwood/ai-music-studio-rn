@@ -9,9 +9,9 @@ import {
   FlatList,
   Image,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors, Typography, Spacing, Radius } from '../../theme';
-import { useMusicStore } from '../../stores/useMusicStore';
-import { usePlayerStore } from '../../stores/usePlayerStore';
+import { useMusicStore, usePlayerStore } from '../../stores';
 
 const TIPS = [
   '장르를 조합하면 더 독특한 음악이 탄생해요!',
@@ -128,7 +128,10 @@ const GeneratingOverlay: React.FC = () => {
 
             {/* 팁 */}
             <View style={styles.tipContainer}>
-              <Text style={styles.tipLabel}>💡 팁</Text>
+              <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: Spacing.xs}}>
+                <Icon name="bulb" size={14} color="#8B5CF6" style={{marginRight: 4}} />
+                <Text style={[styles.tipLabel, {marginBottom: 0}]}>팁</Text>
+              </View>
               <Text style={styles.tipText}>{TIPS[currentTip]}</Text>
             </View>
 
@@ -143,7 +146,7 @@ const GeneratingOverlay: React.FC = () => {
         ) : (
           <>
             {/* 생성 완료 */}
-            <Text style={styles.completeIcon}>🎉</Text>
+            <Icon name="checkmark-circle" size={56} color="#8B5CF6" style={{marginBottom: Spacing.md}} />
             <Text style={styles.completeTitle}>생성 완료!</Text>
             <Text style={styles.completeSubtitle}>
               {generatedTracks.length}개의 트랙이 생성되었습니다
@@ -173,7 +176,10 @@ const GeneratingOverlay: React.FC = () => {
                     </Text>
                   </View>
                   <View style={styles.playBadge}>
-                    <Text style={styles.playBadgeText}>▶ 재생</Text>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                      <Icon name="play" size={12} color="#FFFFFF" style={{marginRight: 2}} />
+                      <Text style={styles.playBadgeText}>재생</Text>
+                    </View>
                   </View>
                 </TouchableOpacity>
               )}

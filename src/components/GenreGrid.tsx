@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../theme/colors';
 import {Typography} from '../theme/typography';
 import {Spacing, Radius} from '../theme/spacing';
@@ -27,7 +28,7 @@ export const GenreGrid: React.FC<GenreGridProps> = ({
         onPress={() => handlePress(item.id)}
         activeOpacity={0.7}
         style={[styles.chip, isSelected && styles.chipSelected]}>
-        <Text style={styles.chipIcon}>{item.icon}</Text>
+        <Icon name={item.icon} size={16} color={isSelected ? Colors.primary : Colors.text2} style={{marginRight: Spacing.xs}} />
         <Text
           style={[
             Typography.captionBold,

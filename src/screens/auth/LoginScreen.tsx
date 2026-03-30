@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../../theme/colors';
 import {Typography} from '../../theme/typography';
 import {Spacing, Radius} from '../../theme/spacing';
@@ -13,21 +14,24 @@ const SOCIAL_BUTTONS = [
     label: 'Google로 시작하기',
     bg: '#FFFFFF',
     textColor: '#333333',
-    icon: '\ud83c\udf10',
+    iconName: 'logo-google',
+    iconColor: '#4285F4',
   },
   {
     provider: 'kakao' as const,
     label: '카카오로 시작하기',
     bg: '#FEE500',
     textColor: '#191919',
-    icon: '\ud83d\udcac',
+    iconName: 'chatbubble',
+    iconColor: '#191919',
   },
   {
     provider: 'naver' as const,
     label: '네이버로 시작하기',
     bg: '#03C75A',
     textColor: '#FFFFFF',
-    icon: 'N',
+    iconName: null as string | null,
+    iconColor: '#FFFFFF',
   },
 ];
 
@@ -52,7 +56,7 @@ export const LoginScreen: React.FC<{navigation: any}> = ({navigation}) => {
         <LinearGradient
           colors={[Colors.primary, Colors.accent]}
           style={styles.logo}>
-          <Text style={styles.logoEmoji}>{'\ud83c\udfb5'}</Text>
+          <Icon name="musical-notes" size={36} color="#FFFFFF" />
         </LinearGradient>
         <Text style={[Typography.h1, styles.title]}>{APP_NAME}</Text>
         <Text style={[Typography.body, styles.subtitle]}>
@@ -67,7 +71,11 @@ export const LoginScreen: React.FC<{navigation: any}> = ({navigation}) => {
             onPress={() => handleSocialLogin(btn.provider)}
             activeOpacity={0.8}
             style={[styles.socialBtn, {backgroundColor: btn.bg}]}>
-            <Text style={styles.socialIcon}>{btn.icon}</Text>
+            {btn.iconName ? (
+              <Icon name={btn.iconName} size={18} color={btn.iconColor} />
+            ) : (
+              <Text style={[styles.socialIcon, {color: btn.iconColor, fontWeight: '800'}]}>N</Text>
+            )}
             <Text style={[Typography.button, {color: btn.textColor}]}>
               {btn.label}
             </Text>

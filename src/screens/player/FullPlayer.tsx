@@ -12,8 +12,9 @@ import {
   PanResponder,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors, Typography, Spacing, Radius } from '../../theme';
-import { usePlayerStore } from '../../stores/usePlayerStore';
+import { usePlayerStore } from '../../stores';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const ALBUM_ART_SIZE = SCREEN_WIDTH * 0.7;
@@ -111,7 +112,8 @@ const FullPlayer: React.FC<FullPlayerProps> = ({ onMinimize }) => {
     outputRange: ['0deg', '360deg'],
   });
 
-  const repeatIcon = repeatMode === 'one' ? '🔂' : repeatMode === 'all' ? '🔁' : '➡️';
+  const repeatIconName = repeatMode === 'one' ? 'repeat' : repeatMode === 'all' ? 'repeat' : 'arrow-forward';
+  const repeatActive = repeatMode !== 'off';
 
   if (!currentTrack) return null;
 
@@ -140,16 +142,14 @@ const FullPlayer: React.FC<FullPlayerProps> = ({ onMinimize }) => {
       {/* 상단 바 */}
       <View style={styles.topBar}>
         <TouchableOpacity onPress={handleMinimize} style={styles.minimizeButton}>
-          <Text style={styles.minimizeIcon}>▼</Text>
+          <Icon name="chevron-down" size={22} color="#FFFFFF" />
         </TouchableOpacity>
         <Text style={styles.topTitle}>지금 재생 중</Text>
         <TouchableOpacity
           style={styles.queueButton}
           onPress={() => setShowLyrics(!showLyrics)}
         >
-          <Text style={styles.queueIcon}>
-            {showLyrics ? '🎵' : '📝'}
-          </Text>
+          <Icon name={showLyrics ? 'musical-notes' : 'document-text'} size={20} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
 
@@ -210,75 +210,65 @@ const FullPlayer: React.FC<FullPlayerProps> = ({ onMinimize }) => {
               style={styles.sideControl}
               onPress={toggleShuffle}
             >
-              <Text
-                style={[
-                  styles.sideControlIcon,
-                  shuffleEnabled && styles.activeControl,
-                ]}
-              >
-                🔀
-              </Text>
+              <Icon
+                name="shuffle"
+                size={22}
+                color={shuffleEnabled ? '#8B5CF6' : 'rgba(255,255,255,0.5)'}
+              />
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.controlBtn}
               onPress={playPrevious}
             >
-              <Text style={styles.controlBtnIcon}>⏮</Text>
+              <Icon name="play-skip-back" size={28} color="#FFFFFF" />
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.playButton}
               onPress={togglePlay}
             >
-              <Text style={styles.playButtonIcon}>
-                {isPlaying ? '⏸' : '▶️'}
-              </Text>
+              <Icon name={isPlaying ? 'pause' : 'play'} size={32} color="#FFFFFF" />
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.controlBtn}
               onPress={playNext}
             >
-              <Text style={styles.controlBtnIcon}>⏭</Text>
+              <Icon name="play-skip-forward" size={28} color="#FFFFFF" />
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.sideControl}
               onPress={toggleRepeat}
             >
-              <Text
-                style={[
-                  styles.sideControlIcon,
-                  repeatMode !== 'off' && styles.activeControl,
-                ]}
-              >
-                {repeatIcon}
-              </Text>
+              <Icon
+                name={repeatIconName}
+                size={22}
+                color={repeatActive ? '#8B5CF6' : 'rgba(255,255,255,0.5)'}
+              />
             </TouchableOpacity>
           </View>
 
           {/* 하단 액션 버튼 */}
           <View style={styles.actionBar}>
             <TouchableOpacity style={styles.actionButton} onPress={toggleLike}>
-              <Text style={styles.actionIcon}>
-                {isLiked ? '❤️' : '🤍'}
-              </Text>
+              <Icon name={isLiked ? 'heart' : 'heart-outline'} size={22} color={isLiked ? '#EF4444' : 'rgba(255,255,255,0.6)'} />
               <Text style={styles.actionLabel}>좋아요</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.actionButton}>
-              <Text style={styles.actionIcon}>📤</Text>
+              <Icon name="share-outline" size={22} color="rgba(255,255,255,0.6)" />
               <Text style={styles.actionLabel}>공유</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.actionButton}>
-              <Text style={styles.actionIcon}>⬇️</Text>
+              <Icon name="download-outline" size={22} color="rgba(255,255,255,0.6)" />
               <Text style={styles.actionLabel}>다운로드</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.actionButton}>
-              <Text style={styles.actionIcon}>📋</Text>
+              <Icon name="list" size={22} color="rgba(255,255,255,0.6)" />
               <Text style={styles.actionLabel}>대기열</Text>
             </TouchableOpacity>
           </View>
@@ -295,7 +285,7 @@ const FullPlayer: React.FC<FullPlayerProps> = ({ onMinimize }) => {
             <Text style={styles.lyricsText}>{currentTrack.lyrics}</Text>
           ) : (
             <View style={styles.lyricsEmpty}>
-              <Text style={styles.lyricsEmptyIcon}>📝</Text>
+              <Icon name="document-text-outline" size={40} color="rgba(255,255,255,0.4)" style={{marginBottom: Spacing.sm}} />
               <Text style={styles.lyricsEmptyText}>
                 가사가 없습니다
               </Text>

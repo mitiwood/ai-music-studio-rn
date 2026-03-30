@@ -7,8 +7,9 @@ import {
   ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors, Typography, Spacing, Radius } from '../../theme';
-import { useMusicStore } from '../../stores/useMusicStore';
+import { useMusicStore } from '../../stores';
 import CustomMode from './CustomMode';
 import SimpleMode from './SimpleMode';
 import YouTubeMode from './YouTubeMode';
@@ -20,14 +21,14 @@ type TabKey = 'custom' | 'simple' | 'youtube' | 'mv';
 interface Tab {
   key: TabKey;
   label: string;
-  icon: string;
+  iconName: string;
 }
 
 const TABS: Tab[] = [
-  { key: 'custom', label: '커스텀', icon: '🎛️' },
-  { key: 'simple', label: '심플', icon: '✨' },
-  { key: 'youtube', label: 'YouTube', icon: '📺' },
-  { key: 'mv', label: 'MV', icon: '🎬' },
+  { key: 'custom', label: '커스텀', iconName: 'options' },
+  { key: 'simple', label: '심플', iconName: 'sparkles' },
+  { key: 'youtube', label: 'YouTube', iconName: 'logo-youtube' },
+  { key: 'mv', label: 'MV', iconName: 'videocam' },
 ];
 
 const CreateScreen: React.FC = () => {
@@ -67,7 +68,11 @@ const CreateScreen: React.FC = () => {
             onPress={() => setActiveTab(tab.key)}
             activeOpacity={0.7}
           >
-            <Text style={styles.tabIcon}>{tab.icon}</Text>
+            <Icon
+              name={tab.iconName}
+              size={20}
+              color={activeTab === tab.key ? Colors.primary : Colors.textSecondary}
+            />
             <Text
               style={[
                 styles.tabLabel,
@@ -105,9 +110,12 @@ const CreateScreen: React.FC = () => {
           end={{ x: 1, y: 1 }}
           style={styles.generateButton}
         >
-          <Text style={styles.generateButtonText}>
-            {isGenerating ? '생성 중...' : '🎵 음악 생성하기'}
-          </Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            {!isGenerating && <Icon name="musical-notes" size={18} color="#FFFFFF" style={{marginRight: 6}} />}
+            <Text style={styles.generateButtonText}>
+              {isGenerating ? '생성 중...' : '음악 생성하기'}
+            </Text>
+          </View>
         </LinearGradient>
       </TouchableOpacity>
 

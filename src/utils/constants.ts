@@ -3,29 +3,29 @@ export const APP_NAME = "Kenny's Music Studio";
 export const APP_VERSION = '1.0.0';
 
 export const GENRES = [
-  {id: 'kpop', label: 'K-Pop', icon: '\ud83c\uddf0\ud83c\uddf7'},
-  {id: 'hiphop', label: 'Hip-Hop', icon: '\ud83c\udfa4'},
-  {id: 'electronic', label: 'Electronic', icon: '\ud83c\udfdb\ufe0f'},
-  {id: 'rock', label: 'Rock', icon: '\ud83c\udfb8'},
-  {id: 'lofi', label: 'Lo-Fi', icon: '\ud83c\udf19'},
-  {id: 'jazz', label: 'Jazz', icon: '\ud83c\udfb7'},
-  {id: 'classical', label: 'Classical', icon: '\ud83c\udfbb'},
-  {id: 'acoustic', label: 'Acoustic', icon: '\ud83e\ude95'},
-  {id: 'rnb', label: 'R&B', icon: '\ud83d\udc9c'},
-  {id: 'ost', label: 'OST', icon: '\ud83c\udfac'},
-  {id: 'edm', label: 'EDM', icon: '\ud83d\udd0a'},
-  {id: 'ballad', label: 'Ballad', icon: '\ud83c\udfb5'},
+  {id: 'kpop', label: 'K-Pop', icon: 'flag'},
+  {id: 'hiphop', label: 'Hip-Hop', icon: 'mic'},
+  {id: 'electronic', label: 'Electronic', icon: 'pulse'},
+  {id: 'rock', label: 'Rock', icon: 'flash'},
+  {id: 'lofi', label: 'Lo-Fi', icon: 'moon'},
+  {id: 'jazz', label: 'Jazz', icon: 'musical-note'},
+  {id: 'classical', label: 'Classical', icon: 'musical-notes'},
+  {id: 'acoustic', label: 'Acoustic', icon: 'leaf'},
+  {id: 'rnb', label: 'R&B', icon: 'heart'},
+  {id: 'ost', label: 'OST', icon: 'film'},
+  {id: 'edm', label: 'EDM', icon: 'volume-high'},
+  {id: 'ballad', label: 'Ballad', icon: 'musical-notes'},
 ];
 
 export const MOODS = [
-  {id: 'happy', label: '\ud589\ubcf5\ud55c', icon: '\ud83d\ude0a'},
-  {id: 'sad', label: '\uc2ac\ud508', icon: '\ud83d\ude22'},
-  {id: 'energetic', label: '\uc5d0\ub108\uc9c0\ud2f1', icon: '\u26a1'},
-  {id: 'chill', label: '\ud3b8\uc548\ud55c', icon: '\ud83e\uddd8'},
-  {id: 'romantic', label: '\ub85c\ub9e8\ud2f1', icon: '\ud83d\udc95'},
-  {id: 'dark', label: '\uc5b4\ub450\uc6b4', icon: '\ud83c\udf11'},
-  {id: 'dreamy', label: '\ubabd\ud658\uc801', icon: '\u2728'},
-  {id: 'epic', label: '\uc6c5\uc7a5\ud55c', icon: '\ud83c\udfd4\ufe0f'},
+  {id: 'happy', label: '\ud589\ubcf5\ud55c', icon: 'happy'},
+  {id: 'sad', label: '\uc2ac\ud508', icon: 'sad'},
+  {id: 'energetic', label: '\uc5d0\ub108\uc9c0\ud2f1', icon: 'flash'},
+  {id: 'chill', label: '\ud3b8\uc548\ud55c', icon: 'leaf'},
+  {id: 'romantic', label: '\ub85c\ub9e8\ud2f1', icon: 'heart'},
+  {id: 'dark', label: '\uc5b4\ub450\uc6b4', icon: 'moon'},
+  {id: 'dreamy', label: '\ubabd\ud658\uc801', icon: 'sparkles'},
+  {id: 'epic', label: '\uc6c5\uc7a5\ud55c', icon: 'trophy'},
 ];
 
 export const VOCAL_TYPES = [

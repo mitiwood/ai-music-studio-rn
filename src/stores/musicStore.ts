@@ -12,7 +12,9 @@ interface MusicState {
   generatedTracks: Track[];
   error: string | null;
   taskId: string | null;
+  generateParams: Partial<GenerateParams>;
 
+  setGenerateParams: (params: Partial<GenerateParams>) => void;
   generate: (params: GenerateParams, userName?: string, userProvider?: string) => Promise<void>;
   reset: () => void;
 }
@@ -24,6 +26,9 @@ export const useMusicStore = create<MusicState>((set, get) => ({
   generatedTracks: [],
   error: null,
   taskId: null,
+  generateParams: {},
+
+  setGenerateParams: (params) => set((state) => ({generateParams: {...state.generateParams, ...params}})),
 
   generate: async (params, userName, userProvider) => {
     set({status: 'generating', progress: 0, statusText: '\uc74c\uc545 \uc0dd\uc131 \uc900\ube44 \uc911...', error: null, generatedTracks: []});

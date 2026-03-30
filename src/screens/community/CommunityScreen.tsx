@@ -9,6 +9,7 @@ import {
   Image,
   RefreshControl,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, getThemeColors, Typography, Spacing, Radius} from '../../theme';
 import {useCommunityStore, useAuthStore, useSettingsStore} from '../../stores';
 import {Track} from '../../api';
@@ -35,9 +36,12 @@ const StarRating = ({rating}: {rating: number}) => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
     stars.push(
-      <Text key={i} style={{fontSize: 12, color: i <= rating ? Colors.warning : Colors.text2}}>
-        ★
-      </Text>,
+      <Icon
+        key={i}
+        name={i <= rating ? 'star' : 'star-outline'}
+        size={12}
+        color={i <= rating ? Colors.warning : Colors.text2}
+      />,
     );
   }
   return <View style={{flexDirection: 'row'}}>{stars}</View>;
@@ -130,12 +134,18 @@ export default function CommunityScreen() {
           </Text>
         </View>
         <View style={styles.statsRow}>
-          <Text style={[Typography.small, {color: tc.textMuted}]}>
-            ▶ {item.comm_plays || 0}
-          </Text>
-          <Text style={[Typography.small, {color: tc.textMuted, marginLeft: Spacing.sm}]}>
-            ♥ {item.comm_likes || 0}
-          </Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon name="play" size={10} color={tc.textMuted} />
+            <Text style={[Typography.small, {color: tc.textMuted, marginLeft: 2}]}>
+              {item.comm_plays || 0}
+            </Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: Spacing.sm}}>
+            <Icon name="heart" size={10} color={tc.textMuted} />
+            <Text style={[Typography.small, {color: tc.textMuted, marginLeft: 2}]}>
+              {item.comm_likes || 0}
+            </Text>
+          </View>
           <View style={{marginLeft: Spacing.sm}}>
             <StarRating rating={Math.round(item.comm_rating || 0)} />
           </View>
@@ -144,7 +154,7 @@ export default function CommunityScreen() {
       <TouchableOpacity
         style={styles.likeBtn}
         onPress={() => user && likeTrack(item.id, user.name, user.provider)}>
-        <Text style={{fontSize: 20, color: Colors.accent}}>♥</Text>
+        <Icon name="heart" size={20} color={Colors.accent} />
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -157,7 +167,7 @@ export default function CommunityScreen() {
 
       {/* Search bar */}
       <View style={[styles.searchBar, {backgroundColor: tc.surface, borderColor: tc.border}]}>
-        <Text style={styles.searchIcon}>🔍</Text>
+        <Icon name="search" size={16} color={tc.textMuted} style={{marginRight: Spacing.sm}} />
         <TextInput
           style={[Typography.body, {color: tc.text, flex: 1, padding: 0}]}
           placeholder="곡 또는 아티스트 검색..."

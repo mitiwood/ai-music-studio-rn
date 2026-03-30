@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer, LinkingOptions} from '@react-navigation/native';
+import {LinkingOptions} from '@react-navigation/native';
 import {SplashScreen} from '../screens/SplashScreen';
 import {LoginScreen} from '../screens/auth/LoginScreen';
 import {BottomTabNavigator} from './BottomTabNavigator';
@@ -38,26 +38,17 @@ const linking: LinkingOptions<RootStackParamList> = {
 
 export const AppNavigator: React.FC = () => {
   return (
-    <NavigationContainer linking={linking}>
-      <Stack.Navigator
-        initialRouteName="Splash"
-        screenOptions={{
-          headerShown: false,
-          cardStyle: {backgroundColor: '#0A0A1A'},
-        }}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{gestureEnabled: false}}
-        />
-        <Stack.Screen
-          name="MainTabs"
-          component={BottomTabNavigator}
-          options={{gestureEnabled: false}}
-        />
-        {/* FullPlayer, Profile 화면은 추후 추가 */}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      initialRouteName="MainTabs"
+      screenOptions={{
+        headerShown: false,
+        cardStyle: {backgroundColor: '#0A0A1A'},
+      }}>
+      <Stack.Screen
+        name="MainTabs"
+        component={BottomTabNavigator}
+        options={{gestureEnabled: false}}
+      />
+    </Stack.Navigator>
   );
 };

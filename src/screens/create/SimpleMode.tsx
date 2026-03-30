@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Colors, Typography, Spacing, Radius } from '../../theme';
-import { useMusicStore } from '../../stores/useMusicStore';
+import { useMusicStore } from '../../stores';
 
 const QUICK_GENRES = [
   'K-Pop', 'Hip-Hop', 'R&B', 'Ballad', 'Rock', 'EDM', 'Lo-Fi', 'Jazz',

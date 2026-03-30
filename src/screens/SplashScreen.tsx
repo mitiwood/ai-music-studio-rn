@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../theme/colors';
 import {Typography} from '../theme/typography';
 import {Spacing, Radius} from '../theme/spacing';
@@ -34,7 +35,7 @@ export const SplashScreen: React.FC<{navigation: any}> = ({navigation}) => {
         <LinearGradient
           colors={[Colors.primary, Colors.accent]}
           style={styles.logoGradient}>
-          <Text style={styles.logoEmoji}>{'\ud83c\udfb5'}</Text>
+          <Icon name="musical-notes" size={40} color="#FFFFFF" />
         </LinearGradient>
       </View>
       <Text style={[Typography.h1, styles.appName]}>{APP_NAME}</Text>

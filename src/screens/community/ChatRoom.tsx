@@ -10,6 +10,7 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, getThemeColors, Typography, Spacing, Radius} from '../../theme';
 import {useChatStore, useAuthStore, useSettingsStore} from '../../stores';
 import {ChatMessage} from '../../api';
@@ -184,7 +185,7 @@ export default function ChatRoom() {
             ↩ {replyTo.name}에게 답장
           </Text>
           <TouchableOpacity onPress={() => setReplyTo(null)}>
-            <Text style={{color: tc.textMuted, fontSize: 18}}>✕</Text>
+            <Icon name="close" size={18} color={tc.textMuted} />
           </TouchableOpacity>
         </View>
       )}

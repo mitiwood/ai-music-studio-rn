@@ -8,8 +8,9 @@ import {
   Animated,
   Easing,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors, Typography, Spacing, Radius } from '../../theme';
-import { usePlayerStore } from '../../stores/usePlayerStore';
+import { usePlayerStore } from '../../stores';
 
 interface MiniPlayerProps {
   onPress: () => void;
@@ -109,9 +110,7 @@ const MiniPlayer: React.FC<MiniPlayerProps> = ({ onPress }) => {
             }}
             hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
-            <Text style={styles.controlIcon}>
-              {isPlaying ? '⏸' : '▶️'}
-            </Text>
+            <Icon name={isPlaying ? 'pause' : 'play'} size={22} color={Colors.textPrimary} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.controlButton}
@@ -121,7 +120,7 @@ const MiniPlayer: React.FC<MiniPlayerProps> = ({ onPress }) => {
             }}
             hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
-            <Text style={styles.controlIcon}>⏭</Text>
+            <Icon name="play-skip-forward" size={22} color={Colors.textPrimary} />
           </TouchableOpacity>
         </View>
       </View>

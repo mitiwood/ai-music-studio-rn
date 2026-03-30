@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../theme/colors';
 import {Typography} from '../theme/typography';
 import {Spacing} from '../theme/spacing';
@@ -19,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({onNotification, onProfile}) => {
       <Text style={[Typography.h2, styles.title]}>{APP_NAME}</Text>
       <View style={styles.right}>
         <TouchableOpacity onPress={onNotification} style={styles.iconBtn}>
-          <Text style={styles.icon}>{'\ud83d\udd14'}</Text>
+          <Icon name="notifications-outline" size={20} color={Colors.text1} />
         </TouchableOpacity>
         <TouchableOpacity onPress={onProfile} style={styles.avatarBtn}>
           {user?.avatar ? (
@@ -27,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({onNotification, onProfile}) => {
           ) : (
             <View style={styles.avatarFallback}>
               <Text style={styles.avatarText}>
-                {user?.name?.charAt(0) || '\ud83c\udfb5'}
+                {user?.name?.charAt(0) || '?'}
               </Text>
             </View>
           )}

@@ -8,8 +8,9 @@ import {
   Switch,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors, Typography, Spacing, Radius } from '../../theme';
-import { useMusicStore } from '../../stores/useMusicStore';
+import { useMusicStore } from '../../stores';
 import { musicApi } from '../../api';
 
 const VOCAL_TYPES = [
@@ -243,9 +244,12 @@ const CustomMode: React.FC = () => {
             onPress={handleGenerateLyrics}
             disabled={isGeneratingLyrics}
           >
-            <Text style={styles.aiButtonText}>
-              {isGeneratingLyrics ? '생성 중...' : '🤖 AI 가사 생성'}
-            </Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              {!isGeneratingLyrics && <Icon name="sparkles" size={14} color={Colors.primary} style={{marginRight: 4}} />}
+              <Text style={styles.aiButtonText}>
+                {isGeneratingLyrics ? '생성 중...' : 'AI 가사 생성'}
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
         <TextInput
@@ -276,9 +280,17 @@ const CustomMode: React.FC = () => {
         style={styles.advancedToggle}
         onPress={() => setShowAdvanced(!showAdvanced)}
       >
-        <Text style={styles.advancedToggleText}>
-          {showAdvanced ? '▲ 고급 설정 접기' : '▼ 고급 설정 펼치기'}
-        </Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Icon
+            name={showAdvanced ? 'chevron-up' : 'chevron-down'}
+            size={16}
+            color={Colors.textSecondary}
+            style={{marginRight: 4}}
+          />
+          <Text style={styles.advancedToggleText}>
+            {showAdvanced ? '고급 설정 접기' : '고급 설정 펼치기'}
+          </Text>
+        </View>
       </TouchableOpacity>
 
       {showAdvanced && (
